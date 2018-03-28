@@ -20,6 +20,7 @@ int fact[9];
     // table.clear();
 // }
 
+//使用set来判重很可能会超时
 // int try_to_insert(int rear){
     // int value = 0;
     // for(int i = 0 ; i < 9 ; i ++){
@@ -51,6 +52,7 @@ int try_to_insert(int rear){
     return vis[code] = 1;
 }
 int bfs(){
+	//使用数组队列方便计算dist
     int front = 1 , rear = 2;
     int x , y , newx , newy , newz;
     // memset(st , 0 , sizeof(st));
@@ -60,6 +62,7 @@ int bfs(){
     init_lookup_table();
     try_to_insert(1);
     while(front <rear){
+		//使用引用使代码更简洁
         State& s = st[front];
        // printf("%d\n" , front);
         if(memcmp(goal , s , sizeof(s)) == 0){return front;}

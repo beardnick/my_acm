@@ -21,6 +21,7 @@ int water[MAXN];
 void up_grade(Node s){
     for(int i = 0 ; i < 3; i ++){
         int d = s.v[i];
+		// 记录量出d水量的最短倒水量
         if(water[d] < 0 || s.dist < water[d])water[d] = s.dist;
     }
 }
@@ -37,6 +38,7 @@ void solve(int a , int b , int c , int d){
     start.dist = 0;
     memset(vis , 0 , sizeof(vis));
     memset(water , -1 , sizeof(water));
+	// 使用优先队列，返回当前倒水最少的一个节点
     priority_queue<Node> q;
     q.push(start);
     vis[0][0] = 1;
@@ -47,7 +49,10 @@ void solve(int a , int b , int c , int d){
         // for(int i = 0 ; i < 3 ; i ++)
             // printf("%d " , u.v[i]);
         // printf("\n");
+		// 只要到达了d就马上返回，并没有遍历所有情况，算法正确性并不显然
         if(water[d] >= 0)break;
+		// 模拟倒水
+		// 枚举出3 X 3的所有组合情况
         for(int i = 0 ; i < 3 ; i ++){
             for(int j = 0 ; j < 3 ; j ++){
                 if(i != j){

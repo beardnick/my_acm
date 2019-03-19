@@ -40,6 +40,7 @@ bool dfs(int d , int from , ll aa , ll bb){
     }
     from = max(from , get_first(aa , bb));
     bool ok = false;
+	// 横向扩展，宽度由maxd确定，最后一个节点是last <= b*(maxd - d) / a
     for(int i = from ;; i ++){
         //如果接下来所有的数都是1/i都小于aa/bb，则无解
         if(aa * i >= bb * (maxd + 1 - d))break;
@@ -47,6 +48,7 @@ bool dfs(int d , int from , ll aa , ll bb){
         int newaa = aa * i - bb;
         int newbb = bb * i;
         int g = gcd(newaa , newbb);
+		//纵向扩展，深度是maxd
         if(dfs(d + 1 , i + 1 , newaa / g , newbb / g)){
             ok = true;
             //要把这一层结点全部遍历完才结束
